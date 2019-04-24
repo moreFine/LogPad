@@ -1,0 +1,370 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4A2ED1BF2270544900694B72 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2ED1BE2270544900694B72 /* AppDelegate.m */; };
+		4A2ED1C22270544900694B72 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2ED1C12270544900694B72 /* ViewController.m */; };
+		4A2ED1C52270544900694B72 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A2ED1C32270544900694B72 /* Main.storyboard */; };
+		4A2ED1C72270544B00694B72 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A2ED1C62270544B00694B72 /* Assets.xcassets */; };
+		4A2ED1CA2270544B00694B72 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A2ED1C82270544B00694B72 /* LaunchScreen.storyboard */; };
+		4A2ED1CD2270544B00694B72 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2ED1CC2270544B00694B72 /* main.m */; };
+		4A2ED1D82270545F00694B72 /* LogPadCenterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2ED1D42270545E00694B72 /* LogPadCenterView.m */; };
+		4A2ED1D92270545F00694B72 /* LogPadEnterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2ED1D62270545E00694B72 /* LogPadEnterView.m */; };
+		4A2ED1DC2270553000694B72 /* WWTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2ED1DA2270553000694B72 /* WWTextView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4A2ED1BA2270544900694B72 /* LogPadDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LogPadDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A2ED1BD2270544900694B72 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		4A2ED1BE2270544900694B72 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		4A2ED1C02270544900694B72 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		4A2ED1C12270544900694B72 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		4A2ED1C42270544900694B72 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4A2ED1C62270544B00694B72 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4A2ED1C92270544B00694B72 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4A2ED1CB2270544B00694B72 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4A2ED1CC2270544B00694B72 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		4A2ED1D42270545E00694B72 /* LogPadCenterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogPadCenterView.m; sourceTree = "<group>"; };
+		4A2ED1D52270545E00694B72 /* LogPadEnterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogPadEnterView.h; sourceTree = "<group>"; };
+		4A2ED1D62270545E00694B72 /* LogPadEnterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogPadEnterView.m; sourceTree = "<group>"; };
+		4A2ED1D72270545E00694B72 /* LogPadCenterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogPadCenterView.h; sourceTree = "<group>"; };
+		4A2ED1DA2270553000694B72 /* WWTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWTextView.m; sourceTree = "<group>"; };
+		4A2ED1DB2270553000694B72 /* WWTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWTextView.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4A2ED1B72270544800694B72 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4A2ED1B12270544800694B72 = {
+			isa = PBXGroup;
+			children = (
+				4A2ED1BC2270544900694B72 /* LogPadDemo */,
+				4A2ED1BB2270544900694B72 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4A2ED1BB2270544900694B72 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4A2ED1BA2270544900694B72 /* LogPadDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4A2ED1BC2270544900694B72 /* LogPadDemo */ = {
+			isa = PBXGroup;
+			children = (
+				4A2ED1D32270545E00694B72 /* LogPad */,
+				4A2ED1BD2270544900694B72 /* AppDelegate.h */,
+				4A2ED1BE2270544900694B72 /* AppDelegate.m */,
+				4A2ED1C02270544900694B72 /* ViewController.h */,
+				4A2ED1C12270544900694B72 /* ViewController.m */,
+				4A2ED1C32270544900694B72 /* Main.storyboard */,
+				4A2ED1C62270544B00694B72 /* Assets.xcassets */,
+				4A2ED1C82270544B00694B72 /* LaunchScreen.storyboard */,
+				4A2ED1CB2270544B00694B72 /* Info.plist */,
+				4A2ED1CC2270544B00694B72 /* main.m */,
+			);
+			path = LogPadDemo;
+			sourceTree = "<group>";
+		};
+		4A2ED1D32270545E00694B72 /* LogPad */ = {
+			isa = PBXGroup;
+			children = (
+				4A2ED1DB2270553000694B72 /* WWTextView.h */,
+				4A2ED1DA2270553000694B72 /* WWTextView.m */,
+				4A2ED1D52270545E00694B72 /* LogPadEnterView.h */,
+				4A2ED1D62270545E00694B72 /* LogPadEnterView.m */,
+				4A2ED1D72270545E00694B72 /* LogPadCenterView.h */,
+				4A2ED1D42270545E00694B72 /* LogPadCenterView.m */,
+			);
+			path = LogPad;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4A2ED1B92270544800694B72 /* LogPadDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A2ED1D02270544B00694B72 /* Build configuration list for PBXNativeTarget "LogPadDemo" */;
+			buildPhases = (
+				4A2ED1B62270544800694B72 /* Sources */,
+				4A2ED1B72270544800694B72 /* Frameworks */,
+				4A2ED1B82270544800694B72 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LogPadDemo;
+			productName = LogPadDemo;
+			productReference = 4A2ED1BA2270544900694B72 /* LogPadDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4A2ED1B22270544800694B72 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = wangwei;
+				TargetAttributes = {
+					4A2ED1B92270544800694B72 = {
+						CreatedOnToolsVersion = 10.1;
+					};
+				};
+			};
+			buildConfigurationList = 4A2ED1B52270544800694B72 /* Build configuration list for PBXProject "LogPadDemo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 4A2ED1B12270544800694B72;
+			productRefGroup = 4A2ED1BB2270544900694B72 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4A2ED1B92270544800694B72 /* LogPadDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4A2ED1B82270544800694B72 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A2ED1CA2270544B00694B72 /* LaunchScreen.storyboard in Resources */,
+				4A2ED1C72270544B00694B72 /* Assets.xcassets in Resources */,
+				4A2ED1C52270544900694B72 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4A2ED1B62270544800694B72 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A2ED1D92270545F00694B72 /* LogPadEnterView.m in Sources */,
+				4A2ED1D82270545F00694B72 /* LogPadCenterView.m in Sources */,
+				4A2ED1C22270544900694B72 /* ViewController.m in Sources */,
+				4A2ED1CD2270544B00694B72 /* main.m in Sources */,
+				4A2ED1BF2270544900694B72 /* AppDelegate.m in Sources */,
+				4A2ED1DC2270553000694B72 /* WWTextView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		4A2ED1C32270544900694B72 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4A2ED1C42270544900694B72 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		4A2ED1C82270544B00694B72 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4A2ED1C92270544B00694B72 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		4A2ED1CE2270544B00694B72 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		4A2ED1CF2270544B00694B72 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4A2ED1D12270544B00694B72 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B4WZLV5NYQ;
+				INFOPLIST_FILE = LogPadDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ww.LogPadDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4A2ED1D22270544B00694B72 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B4WZLV5NYQ;
+				INFOPLIST_FILE = LogPadDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ww.LogPadDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4A2ED1B52270544800694B72 /* Build configuration list for PBXProject "LogPadDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A2ED1CE2270544B00694B72 /* Debug */,
+				4A2ED1CF2270544B00694B72 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4A2ED1D02270544B00694B72 /* Build configuration list for PBXNativeTarget "LogPadDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4A2ED1D12270544B00694B72 /* Debug */,
+				4A2ED1D22270544B00694B72 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4A2ED1B22270544800694B72 /* Project object */;
+}
