@@ -16,6 +16,7 @@
 		4A2ED1D82270545F00694B72 /* LogPadCenterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2ED1D42270545E00694B72 /* LogPadCenterView.m */; };
 		4A2ED1D92270545F00694B72 /* LogPadEnterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2ED1D62270545E00694B72 /* LogPadEnterView.m */; };
 		4A2ED1DC2270553000694B72 /* WWTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2ED1DA2270553000694B72 /* WWTextView.m */; };
+		4AC8BE67227069D30047BFF6 /* LogPad.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4AC8BE66227069D30047BFF6 /* LogPad.gif */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		4A2ED1D72270545E00694B72 /* LogPadCenterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogPadCenterView.h; sourceTree = "<group>"; };
 		4A2ED1DA2270553000694B72 /* WWTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWTextView.m; sourceTree = "<group>"; };
 		4A2ED1DB2270553000694B72 /* WWTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWTextView.h; sourceTree = "<group>"; };
+		4AC8BE66227069D30047BFF6 /* LogPad.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = LogPad.gif; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +69,7 @@
 		4A2ED1BC2270544900694B72 /* LogPadDemo */ = {
 			isa = PBXGroup;
 			children = (
+				4AC8BE66227069D30047BFF6 /* LogPad.gif */,
 				4A2ED1D32270545E00694B72 /* LogPad */,
 				4A2ED1BD2270544900694B72 /* AppDelegate.h */,
 				4A2ED1BE2270544900694B72 /* AppDelegate.m */,
@@ -152,6 +155,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4A2ED1CA2270544B00694B72 /* LaunchScreen.storyboard in Resources */,
+				4AC8BE67227069D30047BFF6 /* LogPad.gif in Resources */,
 				4A2ED1C72270544B00694B72 /* Assets.xcassets in Resources */,
 				4A2ED1C52270544900694B72 /* Main.storyboard in Resources */,
 			);
