@@ -11,7 +11,9 @@
 @interface LogPadCenterView()<UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UIView *panView;
 @property (nonatomic, strong) WWTextView *textView;
-@property (nonatomic, assign) int originalFile;
+@property (nonatomic, assign) int originalCharacter;
+@property (nonatomic, assign) int currentCharacter;
+@property (nonatomic, strong) NSFileHandle *pipeReadHandle;
 @end
 @implementation LogPadCenterView
 -(instancetype)initWithFrame:(CGRect)frame{
@@ -56,16 +58,17 @@
     [self.panView addGestureRecognizer:panGestrure];
 }
 -(void)startMonitorSystemLog{
-    self.originalFile = dup(STDERR_FILENO);
+    //保存重定向前的文件秒速符
+    self.originalCharacter = dup(STDERR_FILENO);
     NSPipe * pipe = [NSPipe pipe] ;
-    NSFileHandle *pipeReadHandle = [pipe fileHandleForReading] ;
+    self.pipeReadHandle = [pipe fileHandleForReading] ;
     int pipeFileHandle = [[pipe fileHandleForWriting] fileDescriptor];
-    dup2(pipeFileHandle, STDERR_FILENO);
+    self.currentCharacter = dup2(pipeFileHandle, STDERR_FILENO);
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(monitorAction:)
                                                  name:NSFileHandleReadCompletionNotification
-                                               object:pipeReadHandle] ;
-    [pipeReadHandle readInBackgroundAndNotify];
+                                               object:self.pipeReadHandle] ;
+    [self.pipeReadHandle readInBackgroundAndNotify];
 }
 -(void)monitorAction:(NSNotification *)notification{
     
@@ -93,8 +96,9 @@
     [[notification object] readInBackgroundAndNotify];
 }
 -(void)removeMonitor{
-    //恢复重定向会导致CPU使用率激增
-    dup2(self.originalFile, STDERR_FILENO);
+    dup2(self.originalCharacter, self.currentCharacter);
+    //恢复重定后需要移除通知否则会导致CPU使用率激增，造成程序卡顿
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 -(void)panAction:(UIPanGestureRecognizer *)pan{
     CGPoint currentPoint = [pan translationInView:self.superview];
