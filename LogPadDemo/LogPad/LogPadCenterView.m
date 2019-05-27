@@ -3,7 +3,7 @@
 //  XJKHealth
 //
 //  Created by wangwei on 2019/4/22.
-//  Copyright © 2019 xiaweidong. All rights reserved.
+//  Copyright © 2019 WW. All rights reserved.
 //
 
 #import "LogPadCenterView.h"
@@ -51,19 +51,26 @@
     [self.panView addConstraints:@[widthConstraint,heightConstraint]];
     [self addConstraints:@[leftConstraint1,rightConstraint1]];
     
-    [self startMonitorSystemLog];
-    
     UIPanGestureRecognizer *panGestrure = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
     panGestrure.delegate = self;
     [self.panView addGestureRecognizer:panGestrure];
 }
+-(void)setType:(NSUInteger)type{
+    _type = type;
+    [self startMonitorSystemLog];
+}
 -(void)startMonitorSystemLog{
-    //保存重定向前的文件秒速符
-    self.originalCharacter = dup(STDERR_FILENO);
-    NSPipe * pipe = [NSPipe pipe] ;
+    //保存重定向前的文件描述符
+    NSPipe * pipe = [NSPipe pipe];
     self.pipeReadHandle = [pipe fileHandleForReading] ;
     int pipeFileHandle = [[pipe fileHandleForWriting] fileDescriptor];
-    self.currentCharacter = dup2(pipeFileHandle, STDERR_FILENO);
+    if (self.type){
+        self.originalCharacter = dup(STDERR_FILENO);
+        self.currentCharacter = dup2(pipeFileHandle, STDERR_FILENO);
+    } else {
+        self.originalCharacter = dup(STDOUT_FILENO);
+        self.currentCharacter = dup2(pipeFileHandle, STDOUT_FILENO);
+    }
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(monitorAction:)
                                                  name:NSFileHandleReadCompletionNotification

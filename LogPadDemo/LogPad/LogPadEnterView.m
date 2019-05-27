@@ -3,7 +3,7 @@
 //  XJKHealth
 //
 //  Created by wangwei on 2019/4/22.
-//  Copyright © 2019 xiaweidong. All rights reserved.
+//  Copyright © 2019 WW. All rights reserved.
 //
 #include <assert.h>
 #include <stdbool.h>
@@ -67,8 +67,8 @@ static bool combinedXcode(void)
     if (combinedXcode()){
         self.hidden = true;
     } else {
+        self.logType = LG_STDERR_FILENO;
         self.backgroundColor = [UIColor colorWithRed:71/255.0 green:158/255.0 blue:229/255.0 alpha:1.0];
-        
         [self.layer setShadowColor:[UIColor colorWithRed:71/255.0 green:158/255.0 blue:229/255.0 alpha:1.0].CGColor];
         [self.layer setShadowOffset:CGSizeMake(0, 0)];
         [self.layer setShadowOpacity:1.0];
@@ -93,6 +93,7 @@ static bool combinedXcode(void)
     if(!self.logCenter){
         self.logCenter = [[LogPadCenterView alloc] initWithFrame:CGRectMake(0, 64, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height / 2.0)];
         self.logCenter.colorSwitch = self.colorSwitch;
+        self.logCenter.type = self.logType == LG_STDERR_FILENO ? 1: 0;
         [[UIApplication sharedApplication].keyWindow addSubview:self.logCenter];
     } else {
         self.logCenter.hidden = !self.logCenter.hidden;

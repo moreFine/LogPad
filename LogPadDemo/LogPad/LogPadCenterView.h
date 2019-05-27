@@ -3,7 +3,7 @@
 //  XJKHealth
 //
 //  Created by wangwei on 2019/4/22.
-//  Copyright © 2019 xiaweidong. All rights reserved.
+//  Copyright © 2019 WW. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LogPadCenterView : UIView
 
 @property (nonatomic, assign) BOOL colorSwitch;
+@property (nonatomic, assign) NSUInteger type;
 
 -(void)startMonitorSystemLog;
 -(void)removeMonitor;

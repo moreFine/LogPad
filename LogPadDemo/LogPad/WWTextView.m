@@ -3,7 +3,7 @@
 //  XJKHealth
 //
 //  Created by wangwei on 2018/7/26.
-//  Copyright © 2018年 xiaweidong. All rights reserved.
+//  Copyright © 2018年 WW. All rights reserved.
 //
 
 #import "WWTextView.h"
