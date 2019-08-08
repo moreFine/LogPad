@@ -1,0 +1,21 @@
+//
+//  DeviceDataMonitor.h
+//  XJKHealth
+//
+//  Created by wangwei on 2019/8/7.
+//  Copyright © 2019 xiaweidong. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+NS_ASSUME_NONNULL_BEGIN
+
+@interface DeviceDataMonitor : NSObject
+@property (nonatomic, copy) void(^CPUUtilization)(CGFloat value);
+@property (nonatomic, copy) void(^FPS)(CGFloat value);
+@property (nonatomic, copy) void(^MemoryUsage)(CGFloat value);
++(instancetype)shareInstance;
+-(void)startMonitor;
+@end
+
+NS_ASSUME_NONNULL_END

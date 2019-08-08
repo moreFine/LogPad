@@ -8,6 +8,8 @@
 
 #import "LogPadCenterView.h"
 #import "WWTextView.h"
+#import "DeviceDataMonitor.h"
+
 @interface LogPadCenterView()<UIGestureRecognizerDelegate>
 @property (nonatomic, strong) UIView *panView;
 @property (nonatomic, strong) WWTextView *textView;
@@ -15,6 +17,7 @@
 @property (nonatomic, assign) int currentCharacter;
 @property (nonatomic, strong) NSFileHandle *pipeReadHandle;
 @end
+
 @implementation LogPadCenterView
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]){
@@ -29,31 +32,78 @@
     return self;
 }
 -(void)creatUI{
+    self.layer.cornerRadius = 2;
+    self.layer.masksToBounds = true;
     self.backgroundColor = [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:0.9];
-    self.textView = [[WWTextView alloc] initWithFrame:self.bounds];
+    self.textView = [[WWTextView alloc] initWithFrame:CGRectMake(5, 30, self.bounds.size.width-10, self.bounds.size.height - 35)];
     self.textView.placeholder = @"\n日志打印区域";
     self.textView.editable = false;
     self.textView.selectable = false;
+    self.textView.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.textView.layer.shadowRadius = 5;
+    self.textView.layer.shadowOffset = CGSizeMake(0, 5);
+    self.textView.layer.shadowOpacity = 0.4;
     [self addSubview:self.textView];
     
-    self.panView = [[UIView alloc] init];
-    self.panView.backgroundColor = [UIColor clearColor];
-    self.panView.layer.cornerRadius = 50.0;
-    self.panView.layer.masksToBounds = true;
-    [self addSubview:self.panView];
-    self.panView.translatesAutoresizingMaskIntoConstraints = false;
-    NSLayoutConstraint *leftConstraint1 = [NSLayoutConstraint constraintWithItem:self.panView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0.0];
-    NSLayoutConstraint *rightConstraint1 = [NSLayoutConstraint constraintWithItem:self.panView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0.0];
+    UIStackView * containerView = [[UIStackView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 25)];
+    containerView.axis = UILayoutConstraintAxisHorizontal;
+    containerView.distribution = UIStackViewDistributionFillEqually;
+    containerView.spacing = 10;
+    containerView.alignment = UIStackViewAlignmentFill;
     
-    NSLayoutConstraint *widthConstraint = [NSLayoutConstraint constraintWithItem:self.panView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:kNilOptions multiplier:1.0 constant:100];
-    NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:self.panView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:kNilOptions multiplier:1.0 constant:100];
+    UILabel *memoryShowLabel = [[UILabel alloc] init];
+    memoryShowLabel.text =  @"_ _";
+    memoryShowLabel.layer.cornerRadius = 2;
+    memoryShowLabel.layer.masksToBounds = true;
+    memoryShowLabel.adjustsFontSizeToFitWidth = true;
+    memoryShowLabel.textAlignment = NSTextAlignmentCenter;
+    memoryShowLabel.backgroundColor = [UIColor colorWithRed:random()%180/255.0 green:random()%180/255.0 blue:random()%180/255.0 alpha:1];
+    [containerView addArrangedSubview:memoryShowLabel];
     
-    [self.panView addConstraints:@[widthConstraint,heightConstraint]];
-    [self addConstraints:@[leftConstraint1,rightConstraint1]];
+    UILabel *cpuShowLabel = [[UILabel alloc] init];
+    cpuShowLabel.text = @"_ _";
+    cpuShowLabel.layer.cornerRadius = 2;
+    cpuShowLabel.layer.masksToBounds = true;
+    cpuShowLabel.adjustsFontSizeToFitWidth = true;
+    cpuShowLabel.textAlignment = NSTextAlignmentCenter;
+    cpuShowLabel.backgroundColor = [UIColor colorWithRed:random()%180/255.0 green:random()%180/255.0 blue:random()%180/255.0 alpha:1];
+    [containerView addArrangedSubview:cpuShowLabel];
+    
+    UILabel *fpsShowLabel = [[UILabel alloc] init];
+    fpsShowLabel.text = @"_ _";
+    fpsShowLabel.layer.cornerRadius = 2;
+    fpsShowLabel.layer.masksToBounds = true;
+    fpsShowLabel.adjustsFontSizeToFitWidth = true;
+    fpsShowLabel.textAlignment = NSTextAlignmentCenter;
+    fpsShowLabel.backgroundColor = [UIColor colorWithRed:random()%180/255.0 green:random()%180/255.0 blue:random()%180/255.0 alpha:1];
+    [containerView addArrangedSubview:fpsShowLabel];
+    
+    UIButton *clearButton = [[UIButton alloc] init];
+    clearButton.layer.cornerRadius = 2;
+    clearButton.layer.masksToBounds = true;
+    [clearButton setTitle:@"清除" forState:UIControlStateNormal];
+    [clearButton addTarget:self action:@selector(clearAction) forControlEvents:UIControlEventTouchUpInside];
+    clearButton.backgroundColor = [UIColor colorWithRed:random()%180/255.0 green:random()%180/255.0 blue:random()%180/255.0 alpha:1];
+    [containerView addArrangedSubview:clearButton];
+    
+    [self addSubview:containerView];
+    
+    [self startMonitorSystemLog];
     
     UIPanGestureRecognizer *panGestrure = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
-    panGestrure.delegate = self;
-    [self.panView addGestureRecognizer:panGestrure];
+    [self addGestureRecognizer:panGestrure];
+    
+    DeviceDataMonitor *deviceMonitor = [DeviceDataMonitor shareInstance];
+    deviceMonitor.CPUUtilization = ^(CGFloat value) {
+        cpuShowLabel.text = [NSString stringWithFormat:@"CPU:%.0f %%",value];
+    };
+    deviceMonitor.FPS = ^(CGFloat value) {
+        fpsShowLabel.text = [NSString stringWithFormat:@"%.0f FPS",value];
+    };
+    deviceMonitor.MemoryUsage = ^(CGFloat value) {
+        memoryShowLabel.text = [NSString stringWithFormat:@"%.01f M",value];
+    };
+    [deviceMonitor startMonitor];
 }
 -(void)setType:(NSUInteger)type{
     _type = type;
@@ -78,7 +128,6 @@
     [self.pipeReadHandle readInBackgroundAndNotify];
 }
 -(void)monitorAction:(NSNotification *)notification{
-    
     NSData *data = [[notification userInfo] objectForKey:NSFileHandleNotificationDataItem];
     NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     CGFloat contentLength = 0;
@@ -107,14 +156,16 @@
     //恢复重定后需要移除通知否则会导致CPU使用率激增，造成程序卡顿
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+-(void)clearAction{
+    if (self.colorSwitch){
+        self.textView.attributedText = nil;
+    } else {
+        self.textView.text = @"";
+    }
+}
 -(void)panAction:(UIPanGestureRecognizer *)pan{
     CGPoint currentPoint = [pan translationInView:self.superview];
     self.center = CGPointMake(self.center.x+currentPoint.x, self.center.y+currentPoint.y);
     [pan setTranslation:CGPointZero inView:self.superview];
-    if (pan.state == UIGestureRecognizerStateBegan || pan.state == UIGestureRecognizerStateChanged){
-        self.panView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.3];
-    } else {
-        self.panView.backgroundColor = [UIColor clearColor];
-    }
 }
 @end

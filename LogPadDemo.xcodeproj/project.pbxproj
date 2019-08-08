@@ -15,7 +15,8 @@
 		4A2ED1CD2270544B00694B72 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2ED1CC2270544B00694B72 /* main.m */; };
 		4A2ED1D82270545F00694B72 /* LogPadCenterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2ED1D42270545E00694B72 /* LogPadCenterView.m */; };
 		4A2ED1D92270545F00694B72 /* LogPadEnterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2ED1D62270545E00694B72 /* LogPadEnterView.m */; };
-		4A2ED1DC2270553000694B72 /* WWTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2ED1DA2270553000694B72 /* WWTextView.m */; };
+		4A48F91022E7F0D600BFB26B /* WWTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A48F90F22E7F0D600BFB26B /* WWTextView.m */; };
+		4A57220622FBC0070037F3CF /* DeviceDataMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A57220522FBC0070037F3CF /* DeviceDataMonitor.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,8 +34,10 @@
 		4A2ED1D52270545E00694B72 /* LogPadEnterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogPadEnterView.h; sourceTree = "<group>"; };
 		4A2ED1D62270545E00694B72 /* LogPadEnterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogPadEnterView.m; sourceTree = "<group>"; };
 		4A2ED1D72270545E00694B72 /* LogPadCenterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogPadCenterView.h; sourceTree = "<group>"; };
-		4A2ED1DA2270553000694B72 /* WWTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWTextView.m; sourceTree = "<group>"; };
-		4A2ED1DB2270553000694B72 /* WWTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWTextView.h; sourceTree = "<group>"; };
+		4A48F90E22E7F0D600BFB26B /* WWTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WWTextView.h; sourceTree = "<group>"; };
+		4A48F90F22E7F0D600BFB26B /* WWTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWTextView.m; sourceTree = "<group>"; };
+		4A57220422FBC0060037F3CF /* DeviceDataMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceDataMonitor.h; sourceTree = "<group>"; };
+		4A57220522FBC0070037F3CF /* DeviceDataMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceDataMonitor.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,12 +87,14 @@
 		4A2ED1D32270545E00694B72 /* LogPad */ = {
 			isa = PBXGroup;
 			children = (
-				4A2ED1DB2270553000694B72 /* WWTextView.h */,
-				4A2ED1DA2270553000694B72 /* WWTextView.m */,
+				4A48F90E22E7F0D600BFB26B /* WWTextView.h */,
+				4A48F90F22E7F0D600BFB26B /* WWTextView.m */,
 				4A2ED1D52270545E00694B72 /* LogPadEnterView.h */,
 				4A2ED1D62270545E00694B72 /* LogPadEnterView.m */,
 				4A2ED1D72270545E00694B72 /* LogPadCenterView.h */,
 				4A2ED1D42270545E00694B72 /* LogPadCenterView.m */,
+				4A57220422FBC0060037F3CF /* DeviceDataMonitor.h */,
+				4A57220522FBC0070037F3CF /* DeviceDataMonitor.m */,
 			);
 			path = LogPad;
 			sourceTree = "<group>";
@@ -168,8 +173,9 @@
 				4A2ED1D82270545F00694B72 /* LogPadCenterView.m in Sources */,
 				4A2ED1C22270544900694B72 /* ViewController.m in Sources */,
 				4A2ED1CD2270544B00694B72 /* main.m in Sources */,
+				4A57220622FBC0070037F3CF /* DeviceDataMonitor.m in Sources */,
 				4A2ED1BF2270544900694B72 /* AppDelegate.m in Sources */,
-				4A2ED1DC2270553000694B72 /* WWTextView.m in Sources */,
+				4A48F91022E7F0D600BFB26B /* WWTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
