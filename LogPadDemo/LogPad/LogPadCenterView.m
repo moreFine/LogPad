@@ -57,7 +57,7 @@
     memoryShowLabel.layer.masksToBounds = true;
     memoryShowLabel.adjustsFontSizeToFitWidth = true;
     memoryShowLabel.textAlignment = NSTextAlignmentCenter;
-    memoryShowLabel.backgroundColor = [UIColor colorWithRed:random()%180/255.0 green:random()%180/255.0 blue:random()%180/255.0 alpha:1];
+    memoryShowLabel.backgroundColor = [UIColor colorWithRed:arc4random()%180/255.0 green:arc4random()%180/255.0 blue:arc4random()%180/255.0 alpha:1];
     [containerView addArrangedSubview:memoryShowLabel];
     
     UILabel *cpuShowLabel = [[UILabel alloc] init];
@@ -66,7 +66,7 @@
     cpuShowLabel.layer.masksToBounds = true;
     cpuShowLabel.adjustsFontSizeToFitWidth = true;
     cpuShowLabel.textAlignment = NSTextAlignmentCenter;
-    cpuShowLabel.backgroundColor = [UIColor colorWithRed:random()%180/255.0 green:random()%180/255.0 blue:random()%180/255.0 alpha:1];
+    cpuShowLabel.backgroundColor = [UIColor colorWithRed:arc4random()%180/255.0 green:arc4random()%180/255.0 blue:arc4random()%180/255.0 alpha:1];
     [containerView addArrangedSubview:cpuShowLabel];
     
     UILabel *fpsShowLabel = [[UILabel alloc] init];
@@ -75,7 +75,7 @@
     fpsShowLabel.layer.masksToBounds = true;
     fpsShowLabel.adjustsFontSizeToFitWidth = true;
     fpsShowLabel.textAlignment = NSTextAlignmentCenter;
-    fpsShowLabel.backgroundColor = [UIColor colorWithRed:random()%180/255.0 green:random()%180/255.0 blue:random()%180/255.0 alpha:1];
+    fpsShowLabel.backgroundColor = [UIColor colorWithRed:arc4random()%180/255.0 green:arc4random()%180/255.0 blue:arc4random()%180/255.0 alpha:1];
     [containerView addArrangedSubview:fpsShowLabel];
     
     UIButton *clearButton = [[UIButton alloc] init];
@@ -83,7 +83,7 @@
     clearButton.layer.masksToBounds = true;
     [clearButton setTitle:@"清除" forState:UIControlStateNormal];
     [clearButton addTarget:self action:@selector(clearAction) forControlEvents:UIControlEventTouchUpInside];
-    clearButton.backgroundColor = [UIColor colorWithRed:random()%180/255.0 green:random()%180/255.0 blue:random()%180/255.0 alpha:1];
+    clearButton.backgroundColor = [UIColor colorWithRed:arc4random()%180/255.0 green:arc4random()%180/255.0 blue:arc4random()%180/255.0 alpha:1];
     [containerView addArrangedSubview:clearButton];
     
     [self addSubview:containerView];
