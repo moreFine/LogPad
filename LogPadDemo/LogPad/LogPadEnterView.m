@@ -1,6 +1,6 @@
 //
 //  LogPadEnterView.m
-//  XJKHealth
+//  WW
 //
 //  Created by wangwei on 2019/4/22.
 //  Copyright © 2019 WW. All rights reserved.
@@ -77,7 +77,7 @@ static bool combinedXcode(void)
         [self.layer setMasksToBounds:false];
         
         self.titleLabel = [[UILabel alloc] initWithFrame:self.bounds];
-        self.titleLabel.text = @"日志";
+        self.titleLabel.text = @"LOG";
         self.titleLabel.textColor = [UIColor whiteColor];
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
         [self addSubview:self.titleLabel];

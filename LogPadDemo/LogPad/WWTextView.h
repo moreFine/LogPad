@@ -1,9 +1,9 @@
 //  自定义带placeholder和限制文案显示的textView
 //  WWTextView.h
-//  XJKHealth
+//  WW
 //
 //  Created by wangwei on 2018/7/26.
-//  Copyright © 2018年 xiaweidong. All rights reserved.
+//  Copyright © 2018年 WW. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

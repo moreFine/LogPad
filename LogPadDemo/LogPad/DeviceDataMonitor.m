@@ -1,9 +1,9 @@
 //
 //  DeviceDataMonitor.m
-//  XJKHealth
+//  WW
 //
 //  Created by wangwei on 2019/8/7.
-//  Copyright © 2019 xiaweidong. All rights reserved.
+//  Copyright © 2019 WW. All rights reserved.
 //
 
 #import "DeviceDataMonitor.h"

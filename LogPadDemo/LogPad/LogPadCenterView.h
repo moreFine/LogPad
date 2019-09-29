@@ -1,6 +1,6 @@
 //
 //  LogPadCenterView.h
-//  XJKHealth
+//  WW
 //
 //  Created by wangwei on 2019/4/22.
 //  Copyright © 2019 WW. All rights reserved.
