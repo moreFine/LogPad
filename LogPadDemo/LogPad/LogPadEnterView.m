@@ -41,7 +41,7 @@ static bool combinedXcode(void)
     junk = sysctl(mib, sizeof(mib) / sizeof(*mib), &info, &size, NULL, 0);
     assert(junk == 0);
     // We're being debugged if the P_TRACED flag is set.
-    return ((info.kp_proc.p_flag & P_TRACED) != 0);
+    return false;//((info.kp_proc.p_flag & P_TRACED) != 0);
 }
 -(instancetype)initWithFrame:(CGRect)frame{
 #ifdef DEBUG

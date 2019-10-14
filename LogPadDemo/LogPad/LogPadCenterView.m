@@ -16,6 +16,7 @@
 @property (nonatomic, assign) int originalCharacter;
 @property (nonatomic, assign) int currentCharacter;
 @property (nonatomic, strong) NSFileHandle *pipeReadHandle;
+@property (nonatomic, strong) UILabel *tipsLabel;
 @end
 
 @implementation LogPadCenterView
@@ -88,7 +89,23 @@
     
     [self addSubview:containerView];
     
+    self.tipsLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 180, 30)];
+    self.tipsLabel.text = @"Log内容复制成功";
+    self.tipsLabel.textAlignment = NSTextAlignmentCenter;
+    self.tipsLabel.font = [UIFont systemFontOfSize:14.0];
+    self.tipsLabel.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+    self.tipsLabel.textColor = [UIColor whiteColor];
+    self.tipsLabel.center = CGPointMake(self.frame.size.width/2.0, self.frame.size.height/2.0);
+    self.tipsLabel.layer.cornerRadius = 3;
+    self.tipsLabel.layer.masksToBounds = true;
+    self.tipsLabel.hidden = true;
+    [self addSubview:self.tipsLabel];
+    
     [self startMonitorSystemLog];
+    
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressAction:)];
+    longPress.minimumPressDuration = 2.0;
+    [self addGestureRecognizer:longPress];
     
     UIPanGestureRecognizer *panGestrure = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)];
     [self addGestureRecognizer:panGestrure];
@@ -127,9 +144,31 @@
                                                object:self.pipeReadHandle] ;
     [self.pipeReadHandle readInBackgroundAndNotify];
 }
+//若某一次打印的数据量过大的话，系统会分几次输出
 -(void)monitorAction:(NSNotification *)notification{
+    static NSData *lastData = nil;
     NSData *data = [[notification userInfo] objectForKey:NSFileHandleNotificationDataItem];
-    NSString *content = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSMutableData *parseData = nil;
+    if (lastData){
+        parseData = [NSMutableData dataWithData:lastData];
+        [parseData appendData:data];
+    } else {
+        parseData =  [NSMutableData dataWithData:data];
+    }
+    NSString *content = nil;
+    if (parseData){
+        content = [[NSString alloc] initWithData:parseData encoding:NSUTF8StringEncoding];
+    }
+    if (!content && parseData.length > 0){
+        //本次发送的data不完整无法解析,需要保存本次并与下次读的数据一起解析
+        lastData = [NSData dataWithData:parseData];
+        content = @"";
+    } else if (!content && parseData.length == 0) {
+        content = @"";
+        lastData = nil;
+    } else {
+        lastData = nil;
+    }
     CGFloat contentLength = 0;
     if (self.colorSwitch){
         CGFloat r = (arc4random() % 180) / 255.0;
@@ -148,7 +187,9 @@
     NSRange visibleRange;
     visibleRange.location = contentLength;
     visibleRange.length = 0;
-    [self.textView scrollRangeToVisible:visibleRange];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.textView scrollRangeToVisible:visibleRange];
+    });
     [[notification object] readInBackgroundAndNotify];
 }
 -(void)removeMonitor{
@@ -161,6 +202,28 @@
         self.textView.attributedText = nil;
     } else {
         self.textView.text = @"";
+    }
+}
+-(void)longPressAction:(UILongPressGestureRecognizer *)longPress{
+    if (longPress.state == UIGestureRecognizerStateBegan){
+        UIPasteboard *pastBoard = [UIPasteboard generalPasteboard];
+        if (self.colorSwitch){
+            if (self.textView.attributedText.string.length != 0){
+                [pastBoard setString:self.textView.attributedText.string];
+                self.tipsLabel.hidden = false;
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    self.tipsLabel.hidden = true;
+                });
+            }
+        } else {
+            if (self.textView.text.length != 0){
+                [pastBoard setString:self.textView.text];
+                self.tipsLabel.hidden = false;
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    self.tipsLabel.hidden = true;
+                });
+            }
+        }
     }
 }
 -(void)panAction:(UIPanGestureRecognizer *)pan{

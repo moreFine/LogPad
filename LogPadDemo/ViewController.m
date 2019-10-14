@@ -17,11 +17,16 @@
     logPad.colorSwitch = true;
     logPad.logType = LG_STDERR_FILENO;
     [logPad show];
-    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"打印" style:UIBarButtonItemStylePlain target:self action:@selector(print)];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"打印" style:UIBarButtonItemStylePlain target:self action:@selector(print1)];
     self.navigationItem.rightBarButtonItem = rightItem;
 }
+-(void)print1{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        [self print];
+    });
+}
 -(void)print{
-    NSLog(@"LOG_PAD输出中...");
+    NSLog(@"Log日志打印中...\n");
 }
 
 @end
