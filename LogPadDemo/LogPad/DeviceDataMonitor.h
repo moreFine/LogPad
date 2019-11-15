@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) void(^MemoryUsage)(CGFloat value);
 +(instancetype)shareInstance;
 -(void)startMonitor;
+-(BOOL)debugger;
 @end
 
 NS_ASSUME_NONNULL_END

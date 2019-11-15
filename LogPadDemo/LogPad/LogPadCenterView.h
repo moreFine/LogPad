@@ -13,10 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LogPadCenterView : UIView
 
 @property (nonatomic, assign) BOOL colorSwitch;
-@property (nonatomic, assign) NSUInteger type;
-
--(void)startMonitorSystemLog;
--(void)removeMonitor;
 
 @end
 

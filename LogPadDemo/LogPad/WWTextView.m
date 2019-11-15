@@ -8,7 +8,7 @@
 
 #import "WWTextView.h"
 
-@interface WWTextView()<UITextViewDelegate>
+@interface WWTextView()<UITextViewDelegate,UIScrollViewDelegate>
 @property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, strong) UILabel *limitLabel;
 @property (nonatomic, strong) UILabel *placeHolderLabel;
@@ -179,6 +179,12 @@
         }
         [self.delegate textView:self textDidChange:textView.text adjustHeight:height];
     }
+}
+-(void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    self.userDraging = true;
+}
+-(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    self.userDraging = false;
 }
 //设置边框颜色
 - (void)setBorderWidth:(float)borderWidth withColor:(UIColor *)color{

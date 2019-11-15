@@ -17,6 +17,7 @@
 		4A2ED1D92270545F00694B72 /* LogPadEnterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A2ED1D62270545E00694B72 /* LogPadEnterView.m */; };
 		4A48F91022E7F0D600BFB26B /* WWTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A48F90F22E7F0D600BFB26B /* WWTextView.m */; };
 		4A57220622FBC0070037F3CF /* DeviceDataMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A57220522FBC0070037F3CF /* DeviceDataMonitor.m */; };
+		4A861794237E92FC001CBA45 /* LogRedirectController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A861793237E92FC001CBA45 /* LogRedirectController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,8 @@
 		4A48F90F22E7F0D600BFB26B /* WWTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WWTextView.m; sourceTree = "<group>"; };
 		4A57220422FBC0060037F3CF /* DeviceDataMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceDataMonitor.h; sourceTree = "<group>"; };
 		4A57220522FBC0070037F3CF /* DeviceDataMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceDataMonitor.m; sourceTree = "<group>"; };
+		4A861792237E92FB001CBA45 /* LogRedirectController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogRedirectController.h; sourceTree = "<group>"; };
+		4A861793237E92FC001CBA45 /* LogRedirectController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogRedirectController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +98,8 @@
 				4A2ED1D42270545E00694B72 /* LogPadCenterView.m */,
 				4A57220422FBC0060037F3CF /* DeviceDataMonitor.h */,
 				4A57220522FBC0070037F3CF /* DeviceDataMonitor.m */,
+				4A861792237E92FB001CBA45 /* LogRedirectController.h */,
+				4A861793237E92FC001CBA45 /* LogRedirectController.m */,
 			);
 			path = LogPad;
 			sourceTree = "<group>";
@@ -171,6 +176,7 @@
 			files = (
 				4A2ED1D92270545F00694B72 /* LogPadEnterView.m in Sources */,
 				4A2ED1D82270545F00694B72 /* LogPadCenterView.m in Sources */,
+				4A861794237E92FC001CBA45 /* LogRedirectController.m in Sources */,
 				4A2ED1C22270544900694B72 /* ViewController.m in Sources */,
 				4A2ED1CD2270544B00694B72 /* main.m in Sources */,
 				4A57220622FBC0070037F3CF /* DeviceDataMonitor.m in Sources */,
