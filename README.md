@@ -15,6 +15,7 @@ d.debug模式下载真机未连接Xcode的情况下显示日志显示入口，re
 
 e.CPU使用率，FPS，内存使用显示。
 
+f.支持异常捕捉，支持日志本地存储，支持读取本地日志文件。
 使用：
 cocoaPod:  pod 'LogPad'
 #
