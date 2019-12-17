@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 NS_ASSUME_NONNULL_BEGIN
-
+void RegisterExceptionHandler(void);
 @interface DeviceDataMonitor : NSObject
 @property (nonatomic, copy) void(^CPUUtilization)(CGFloat value);
 @property (nonatomic, copy) void(^FPS)(CGFloat value);

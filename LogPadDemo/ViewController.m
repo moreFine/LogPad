@@ -31,14 +31,21 @@
     UIBarButtonItem *rightItem1 = [[UIBarButtonItem alloc] initWithTitle:@"恢复" style:UIBarButtonItemStylePlain target:self action:@selector(recover)];
     UIBarButtonItem *rightItem2 = [[UIBarButtonItem alloc] initWithTitle:@"重定向" style:UIBarButtonItemStylePlain target:self action:@selector(redirect)];
     self.navigationItem.rightBarButtonItems = @[rightItem1,rightItem2];
-    self.navigationItem.rightBarButtonItems = @[rightItem1,rightItem2];
     
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithTitle:@"打印" style:UIBarButtonItemStylePlain target:self action:@selector(print)];
-    self.navigationItem.leftBarButtonItem = leftItem;
+    UIBarButtonItem *leftItem1 = [[UIBarButtonItem alloc] initWithTitle:@"打印" style:UIBarButtonItemStylePlain target:self action:@selector(print)];
+    UIBarButtonItem *leftItem2 = [[UIBarButtonItem alloc] initWithTitle:@"崩溃" style:UIBarButtonItemStylePlain target:self action:@selector(crashAction)];
+    self.navigationItem.leftBarButtonItems = @[leftItem1,leftItem2];
     
     self.logger = [LogRedirectController shareInstance];
     self.logger.logType = LG_STDERR_FILENO;
-    self.logger.enableDebugger = true;
+    self.logger.customReadHandler = ^NSData * _Nonnull(NSData * _Nonnull logData) {
+        //TODO:- you can do something or return  original value
+        return logData;
+    };
+    self.logger.customWriteHandler = ^NSData * _Nonnull(NSData * _Nonnull logData) {
+        //TODO:- you can do something or return  original value
+               return logData;
+    };
     [self.logger startMonitorSystemLog];
 }
 -(void)recover{
@@ -53,5 +60,8 @@
     Log_out(@"日志打印中3....");
     Loh_printf(@"日志打印中4....");
 }
-
+-(void)crashAction{
+    NSArray *arr = [NSArray new];
+    arr[2];
+}
 @end

@@ -37,7 +37,7 @@
     self.textView = [[WWTextView alloc] initWithFrame:CGRectMake(5, 30, self.bounds.size.width-10, self.bounds.size.height - 35)];
     self.textView.placeholder = @"\n日志打印区域";
     self.textView.editable = false;
-    self.textView.selectable = false;
+    self.textView.selectable = true;
     self.textView.layer.shadowColor = [UIColor blackColor].CGColor;
     self.textView.layer.shadowRadius = 5;
     self.textView.layer.shadowOffset = CGSizeMake(0, 5);
@@ -58,6 +58,9 @@
     memoryShowLabel.textAlignment = NSTextAlignmentCenter;
     memoryShowLabel.backgroundColor = [self randomColor];
     [containerView addArrangedSubview:memoryShowLabel];
+    memoryShowLabel.userInteractionEnabled = true;
+    UITapGestureRecognizer *scrollTop = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollToTopACtion)];
+    [memoryShowLabel addGestureRecognizer:scrollTop];
     
     UILabel *cpuShowLabel = [[UILabel alloc] init];
     cpuShowLabel.text = @"_ _";
@@ -67,6 +70,9 @@
     cpuShowLabel.textAlignment = NSTextAlignmentCenter;
     cpuShowLabel.backgroundColor = [self randomColor];
     [containerView addArrangedSubview:cpuShowLabel];
+    cpuShowLabel.userInteractionEnabled = true;
+    UITapGestureRecognizer *scrollBottom = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(scrollToBottomAction)];
+    [cpuShowLabel addGestureRecognizer:scrollBottom];
     
     UILabel *fpsShowLabel = [[UILabel alloc] init];
     fpsShowLabel.text = @"_ _";
@@ -134,7 +140,9 @@
     }
 }
 -(void)readAction{
-    NSString *log = [[NSString alloc] initWithData:[NSData dataWithContentsOfFile:[LogRedirectController shareInstance].logFilePath] encoding:NSUTF8StringEncoding];
+    NSString *log = [[LogRedirectController shareInstance] readLogFromFile:^NSData * _Nonnull(NSData * _Nonnull LogData) {
+        return LogData;
+    }];
     NSMutableAttributedString *attributeContent = [[NSMutableAttributedString alloc] init];
     if (log){
         NSArray<NSString *> *logArray = [log componentsSeparatedByString:@"\r\n"];
@@ -144,6 +152,12 @@
         }];
     }
     self.textView.attributedText = attributeContent;
+}
+-(void)scrollToTopACtion{
+    [self.textView scrollRangeToVisible:NSMakeRange(0, 1)];
+}
+-(void)scrollToBottomAction{
+    [self.textView scrollRangeToVisible:NSMakeRange(0, self.textView.attributedText.description.length)];
 }
 -(void)longPressAction:(UILongPressGestureRecognizer *)longPress{
     if (longPress.state == UIGestureRecognizerStateBegan){

@@ -13,6 +13,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <sys/sysctl.h>
+#import "LogRedirectController.h"
 
 @interface DeviceDataMonitor()
 @property (nonatomic, strong) CADisplayLink *displayLink;
@@ -122,25 +123,39 @@
     }
 }
 static bool combinedXcode(void) {
-    // Returns true if the current process is being debugged (either running under the debugger or has a debugger attached post facto).
     int                 junk;
     int                 mib[4];
     struct kinfo_proc   info;  //进程信息结构体
     size_t              size;
-    // Initialize the flags so that, if sysctl fails for some bizarre
-    // reason, we get a predictable result.
     info.kp_proc.p_flag = 0;
-    // Initialize mib, which tells sysctl the info we want, in this case
-    // we're looking for information about a specific process ID.
     mib[0] = CTL_KERN;       //最大进程数
     mib[1] = KERN_PROC;      //进程列表
     mib[2] = KERN_PROC_PID;  //进程id
     mib[3] = getpid();       //获取目前进程的父进程识别码
-    // Call sysctl.
     size = sizeof(info);
     junk = sysctl(mib, sizeof(mib) / sizeof(*mib), &info, &size, NULL, 0);
     assert(junk == 0);
-    // We're being debugged if the P_TRACED flag is set.
-    return ((info.kp_proc.p_flag & P_TRACED) != 0);
+    return false;//((info.kp_proc.p_flag & P_TRACED) != 0);
+}
+void RegisterExceptionHandler(void){
+    NSSetUncaughtExceptionHandler(&HandleException);
+}
+void HandleException(NSException *exception){
+    NSString *name = [exception name];
+    NSString *reason = [exception reason];
+    NSArray *symbols = [exception callStackSymbols];                // 异常发生时的调用栈
+    NSMutableString* strSymbols = [[ NSMutableString alloc ] init]; //将调用栈拼成输出日志的字符串
+    for (NSString* item in symbols){
+        [strSymbols appendString: item];
+        [strSymbols appendString: @"\n" ];
+    }
+    //获取当前时间
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"]];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *dateStr = [formatter stringFromDate:[NSDate date]];
+
+    NSString *crashString = [NSString stringWithFormat:@"---EXCEPTION_INFO---\n%@\nExceptionName：%@\nReason：%@\nCallTrace：\n%@\n\r\n", dateStr, name, reason, strSymbols];
+    [[LogRedirectController shareInstance] writeLogToFile:crashString customHandler:nil];
 }
 @end
