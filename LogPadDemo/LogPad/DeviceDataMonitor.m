@@ -135,7 +135,7 @@ static bool combinedXcode(void) {
     size = sizeof(info);
     junk = sysctl(mib, sizeof(mib) / sizeof(*mib), &info, &size, NULL, 0);
     assert(junk == 0);
-    return ((info.kp_proc.p_flag & P_TRACED) != 0);
+    return (info.kp_proc.p_flag & P_TRACED) != 0;
 }
 void RegisterExceptionHandler(void){
     NSSetUncaughtExceptionHandler(&HandleException);
