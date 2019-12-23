@@ -128,10 +128,10 @@ static bool combinedXcode(void) {
     struct kinfo_proc   info;  //进程信息结构体
     size_t              size;
     info.kp_proc.p_flag = 0;
-    mib[0] = CTL_KERN;       //最大进程数
-    mib[1] = KERN_PROC;      //进程列表
-    mib[2] = KERN_PROC_PID;  //进程id
-    mib[3] = getpid();       //获取目前进程的父进程识别码
+    mib[0] = CTL_KERN;        //最大进程数
+    mib[1] = KERN_PROC;       //进程列表
+    mib[2] = KERN_PROC_PID;   //进程id
+    mib[3] = getpid();        //获取目前进程的父进程识别码
     size = sizeof(info);
     junk = sysctl(mib, sizeof(mib) / sizeof(*mib), &info, &size, NULL, 0);
     assert(junk == 0);
