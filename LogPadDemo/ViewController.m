@@ -27,7 +27,7 @@
     self.logPad = [[LogPadEnterView alloc] initWithFrame:CGRectMake(10, [UIScreen mainScreen].bounds.size.height - 70, 50, 50)];
     self.logPad.colorSwitch = true;
     [self.logPad show];
-   
+    
     UIBarButtonItem *rightItem1 = [[UIBarButtonItem alloc] initWithTitle:@"恢复" style:UIBarButtonItemStylePlain target:self action:@selector(recover)];
     UIBarButtonItem *rightItem2 = [[UIBarButtonItem alloc] initWithTitle:@"重定向" style:UIBarButtonItemStylePlain target:self action:@selector(redirect)];
     self.navigationItem.rightBarButtonItems = @[rightItem1,rightItem2];
@@ -44,7 +44,7 @@
     };
     self.logger.customWriteHandler = ^NSData * _Nonnull(NSData * _Nonnull logData) {
         //TODO:- you can do something or return  original value
-               return logData;
+        return logData;
     };
     [self.logger startMonitorSystemLog];
 }

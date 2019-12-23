@@ -116,7 +116,7 @@
     }
 }
 -(BOOL)debugger{
-   if (combinedXcode()){
+    if (combinedXcode()){
         return true;
     } else {
         return false;
@@ -135,7 +135,7 @@ static bool combinedXcode(void) {
     size = sizeof(info);
     junk = sysctl(mib, sizeof(mib) / sizeof(*mib), &info, &size, NULL, 0);
     assert(junk == 0);
-    return false;//((info.kp_proc.p_flag & P_TRACED) != 0);
+    return ((info.kp_proc.p_flag & P_TRACED) != 0);
 }
 void RegisterExceptionHandler(void){
     NSSetUncaughtExceptionHandler(&HandleException);
@@ -154,7 +154,7 @@ void HandleException(NSException *exception){
     [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"]];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString *dateStr = [formatter stringFromDate:[NSDate date]];
-
+    
     NSString *crashString = [NSString stringWithFormat:@"---EXCEPTION_INFO---\n%@\nExceptionName：%@\nReason：%@\nCallTrace：\n%@\n\r\n", dateStr, name, reason, strSymbols];
     [[LogRedirectController shareInstance] writeLogToFile:crashString customHandler:nil];
 }

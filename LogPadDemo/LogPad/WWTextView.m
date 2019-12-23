@@ -149,7 +149,7 @@
     }
     if ([text isEqualToString:@""]){
         if (self.limitTextType == DEFAULT){
-             self.limitLabel.text = [NSString stringWithFormat:@"%ld/%ld",self.limitLength - ((NSInteger)textView.text.length - 1 != 0 && (NSInteger)textView.text.length - 1 > 0 ? (NSInteger)textView.text.length - 1 : 0),_limitLength];
+            self.limitLabel.text = [NSString stringWithFormat:@"%ld/%ld",self.limitLength - ((NSInteger)textView.text.length - 1 != 0 && (NSInteger)textView.text.length - 1 > 0 ? (NSInteger)textView.text.length - 1 : 0),_limitLength];
         } else {
             self.limitLabel.text = [NSString stringWithFormat:@"还可以输入%ld个字",self.limitLength - ((NSInteger)textView.text.length - 1 != 0 && (NSInteger)textView.text.length - 1 > 0 ? (NSInteger)textView.text.length - 1 : 0)];
         }
@@ -162,9 +162,9 @@
             }
         } else {
             if (self.limitTextType == DEFAULT){
-                 self.limitLabel.text = [NSString stringWithFormat:@"%ld/%ld",self.limitLength - ((NSInteger)textView.text.length + text.length),_limitLength];
+                self.limitLabel.text = [NSString stringWithFormat:@"%ld/%ld",self.limitLength - ((NSInteger)textView.text.length + text.length),_limitLength];
             } else {
-                 self.limitLabel.text = [NSString stringWithFormat:@"还可以输入%ld个字",self.limitLength - ((NSInteger)textView.text.length + text.length)];
+                self.limitLabel.text = [NSString stringWithFormat:@"还可以输入%ld个字",self.limitLength - ((NSInteger)textView.text.length + text.length)];
             }
         }
     }

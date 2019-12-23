@@ -57,7 +57,7 @@ static LogPadEnterView *_enterView = nil;
     }
 }
 -(void)show{
-     [[UIApplication sharedApplication].keyWindow addSubview:self];
+    [[UIApplication sharedApplication].keyWindow addSubview:self];
 }
 -(void)tapAction:(UITapGestureRecognizer *)tap{
     if(!self.logCenter){
