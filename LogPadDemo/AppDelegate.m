@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "DeviceDataMonitor.h"
 @interface AppDelegate ()
 
 @end
@@ -17,6 +17,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    NSLog(@"启动时间:%f",CACurrentMediaTime() * 1000 - [DeviceDataMonitor processStartTime]);
     return YES;
 }
 

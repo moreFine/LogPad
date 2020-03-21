@@ -137,19 +137,20 @@
 -(void)fluencyMonitorAction{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         while (true) {
+            //没有上锁的话lockNumber == 0
             long lockNumber = dispatch_semaphore_wait(self->_synLock, dispatch_time(DISPATCH_TIME_NOW, 3*NSEC_PER_SEC));
-//            NSLog(@"1111111111:%ld",lockNumber);
-            if (!self->_runloopObserver) {
-                self->_synLock = 0;
-                self->_runLoopActivity = 0;
-                return;
-            }
             if (lockNumber != 0){
-                if (self->_runLoopActivity == kCFRunLoopBeforeSources || self->_runLoopActivity == kCFRunLoopAfterWaiting){ dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-                    //捕获当前执行的函数栈
-                    NSLog(@"▶️▶️▶️发生了卡顿◀️◀️◀️");
-                    NSLog(@"%@",NSThread.callStackSymbols);
-                });
+                if (!self->_runloopObserver) {
+                    self->_synLock = 0;
+                    self->_runLoopActivity = 0;
+                    return;
+                }
+                if (self->_runLoopActivity == kCFRunLoopBeforeSources || self->_runLoopActivity == kCFRunLoopAfterWaiting){
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                        //捕获当前执行的函数栈
+                        NSLog(@"▶️▶️▶️发生了卡顿◀️◀️◀️");
+                        NSLog(@"%@",NSThread.callStackSymbols);
+                    });
                 }
             }
         }
@@ -160,6 +161,21 @@
         return true;
     } else {
         return false;
+    }
+}
+
++(BOOL)processInfoForPID:(int)pid procInfo:(struct kinfo_proc*)procInfo{
+    int cmd[4] = {CTL_KERN, KERN_PROC, KERN_PROC_PID, pid};
+    size_t size = sizeof(*procInfo);
+    return sysctl(cmd, sizeof(cmd)/sizeof(*cmd), procInfo, &size, NULL, 0) == 0;
+}
++(NSTimeInterval)processStartTime{
+    struct kinfo_proc kProcInfo;
+    if ([self processInfoForPID:[[NSProcessInfo processInfo] processIdentifier] procInfo:&kProcInfo]) {
+        return kProcInfo.kp_proc.p_un.__p_starttime.tv_sec * 1000.0 + kProcInfo.kp_proc.p_un.__p_starttime.tv_usec / 1000.0;
+    } else {
+        NSAssert(NO, @"无法取得进程的信息");
+        return 0;
     }
 }
 static bool combinedXcode(void) {
@@ -177,23 +193,28 @@ static bool combinedXcode(void) {
     assert(junk == 0);
     return false;//(info.kp_proc.p_flag & P_TRACED) != 0;
 }
-static int fatal_signals[] = { SIGABRT, SIGBUS, SIGFPE, SIGILL, SIGSEGV, SIGTRAP, SIGTERM, SIGKILL,};
-static int fatal_signal_num = sizeof(fatal_signals) / sizeof(fatal_signals[0]);
 static void runLoopObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopActivity activity, void *info){
     DeviceDataMonitor *monitor = (__bridge DeviceDataMonitor*)info;
     monitor->_runLoopActivity = activity;
     
     dispatch_semaphore_t semaphore = monitor->_synLock;
-    long result = dispatch_semaphore_signal(semaphore);
-//    NSLog(@"222222:%ld",result);
+    dispatch_semaphore_signal(semaphore);
 }
+static int fatal_signals[] = { SIGABRT, SIGBUS, SIGFPE, SIGILL, SIGSEGV, SIGTRAP, SIGTERM, SIGKILL,};
+static int fatal_signal_num = sizeof(fatal_signals) / sizeof(fatal_signals[0]);
+static NSUncaughtExceptionHandler *_previousHandler;
 void RegisterExceptionHandler(void){
+    //保存其它使用NSSetUncaughtExceptionHandler的SDK设置的handler
+    _previousHandler = NSGetUncaughtExceptionHandler();
     NSSetUncaughtExceptionHandler(&HandleException);
 }
 void SignalHandler(int signalType){
     NSLog(@"signal handler = %d",signalType);
 }
 void HandleException(NSException *exception){
+    if (_previousHandler){
+        _previousHandler(exception);
+    }
     for (int i = 0; i < fatal_signal_num ; ++i){
         signal(fatal_signals[i], SignalHandler);
     }
