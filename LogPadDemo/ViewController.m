@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import "LogPadEnterView.h"
 #import "LogRedirectController.h"
-
+#import <mach/message.h>
 #define Log_err(FORMAT, ...) fprintf(stderr,"%s 第:%d行 %s\n", __func__,__LINE__,[[NSString stringWithFormat: FORMAT, ## __VA_ARGS__] UTF8String])
 
 #define Log_out(FORMAT, ...) fprintf(stdout,"%s 第:%d行 %s\n", __func__,__LINE__,[[NSString stringWithFormat: FORMAT, ## __VA_ARGS__] UTF8String])
@@ -61,7 +61,7 @@
     Loh_printf(@"日志打印中4....");
 }
 -(void)crashAction{
-    NSArray *arr = [NSArray new];
-    arr[2];
+    [self performSelector:@selector(logPad:)];
+    [[NSRunLoop currentRunLoop] addPort:[NSPort port] forMode:NSRunLoopCommonModes];
 }
 @end

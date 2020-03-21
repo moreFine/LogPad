@@ -16,6 +16,12 @@
 #import "LogRedirectController.h"
 
 @interface DeviceDataMonitor()
+{
+    CFRunLoopObserverRef _runloopObserver;
+@public
+    dispatch_semaphore_t _synLock;
+    CFRunLoopActivity _runLoopActivity;
+}
 @property (nonatomic, strong) CADisplayLink *displayLink;
 @property (nonatomic, assign) NSTimeInterval lastTimestamp;
 @end
@@ -31,10 +37,16 @@
 -(void)startMonitor{
     self.lastTimestamp = 0;
     [self fpsMonitor];
+    [self startFluencyMonitor];
 }
 -(void)stopMonitor{
     [self.displayLink invalidate];
     self.displayLink = nil;
+    if (_runloopObserver){
+        CFRunLoopRemoveObserver(CFRunLoopGetMain(), _runloopObserver, kCFRunLoopCommonModes);
+        CFRelease(_runloopObserver);
+        _runloopObserver = NULL;
+    }
 }
 -(void)cpuMonitor{
     kern_return_t kr;
@@ -115,6 +127,34 @@
         [self memoryMonitor];
     }
 }
+-(void)startFluencyMonitor{
+    _synLock = dispatch_semaphore_create(0);
+    CFRunLoopObserverContext context = {0,(__bridge void*)self,NULL,NULL};
+    _runloopObserver = CFRunLoopObserverCreate(kCFAllocatorDefault, kCFRunLoopAllActivities, true, 0, &runLoopObserverCallBack, &context);
+    CFRunLoopAddObserver(CFRunLoopGetMain(), _runloopObserver, kCFRunLoopCommonModes);
+    [self fluencyMonitorAction];
+}
+-(void)fluencyMonitorAction{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        while (true) {
+            long lockNumber = dispatch_semaphore_wait(self->_synLock, dispatch_time(DISPATCH_TIME_NOW, 3*NSEC_PER_SEC));
+//            NSLog(@"1111111111:%ld",lockNumber);
+            if (!self->_runloopObserver) {
+                self->_synLock = 0;
+                self->_runLoopActivity = 0;
+                return;
+            }
+            if (lockNumber != 0){
+                if (self->_runLoopActivity == kCFRunLoopBeforeSources || self->_runLoopActivity == kCFRunLoopAfterWaiting){ dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+                    //捕获当前执行的函数栈
+                    NSLog(@"▶️▶️▶️发生了卡顿◀️◀️◀️");
+                    NSLog(@"%@",NSThread.callStackSymbols);
+                });
+                }
+            }
+        }
+    });
+}
 -(BOOL)debugger{
     if (combinedXcode()){
         return true;
@@ -135,12 +175,28 @@ static bool combinedXcode(void) {
     size = sizeof(info);
     junk = sysctl(mib, sizeof(mib) / sizeof(*mib), &info, &size, NULL, 0);
     assert(junk == 0);
-    return (info.kp_proc.p_flag & P_TRACED) != 0;
+    return false;//(info.kp_proc.p_flag & P_TRACED) != 0;
+}
+static int fatal_signals[] = { SIGABRT, SIGBUS, SIGFPE, SIGILL, SIGSEGV, SIGTRAP, SIGTERM, SIGKILL,};
+static int fatal_signal_num = sizeof(fatal_signals) / sizeof(fatal_signals[0]);
+static void runLoopObserverCallBack(CFRunLoopObserverRef observer, CFRunLoopActivity activity, void *info){
+    DeviceDataMonitor *monitor = (__bridge DeviceDataMonitor*)info;
+    monitor->_runLoopActivity = activity;
+    
+    dispatch_semaphore_t semaphore = monitor->_synLock;
+    long result = dispatch_semaphore_signal(semaphore);
+//    NSLog(@"222222:%ld",result);
 }
 void RegisterExceptionHandler(void){
     NSSetUncaughtExceptionHandler(&HandleException);
 }
+void SignalHandler(int signalType){
+    NSLog(@"signal handler = %d",signalType);
+}
 void HandleException(NSException *exception){
+    for (int i = 0; i < fatal_signal_num ; ++i){
+        signal(fatal_signals[i], SignalHandler);
+    }
     NSString *name = [exception name];
     NSString *reason = [exception reason];
     NSArray *symbols = [exception callStackSymbols];                // 异常发生时的调用栈

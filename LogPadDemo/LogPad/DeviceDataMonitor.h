@@ -14,8 +14,10 @@ void RegisterExceptionHandler(void);
 @property (nonatomic, copy) void(^CPUUtilization)(CGFloat value);
 @property (nonatomic, copy) void(^FPS)(CGFloat value);
 @property (nonatomic, copy) void(^MemoryUsage)(CGFloat value);
+-(instancetype)init NS_UNAVAILABLE;
 +(instancetype)shareInstance;
 -(void)startMonitor;
+-(void)stopMonitor;
 -(BOOL)debugger;
 @end
 

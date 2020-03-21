@@ -13,9 +13,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL colorSwitch; //文本是否设置随机颜色
 
 -(instancetype)init NS_UNAVAILABLE;
-/**
-   显示logPad入口
- */
 -(void)show;
 @end
 
